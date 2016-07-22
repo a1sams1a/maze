@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="problem">
+    <h3>!미궁! <small>- {{no}} / {{profile.problem_set.max_no}}</small></h3>
+    {% autoescape off %}
+    {{problem.text}}
+    {% endautoescape %}
+
+    {% if profile.progress_no == no %}
+    <form class="col s12" action="/core/solve/{{no}}/" method="post">
+        {% if msg == 2%}
+        <p class="red-text text-darken-4">잘못된 답입니다.</p>
+        {% endif %}
+
+        {% csrf_token %}
+        <div class="row">
+            <div class="input-field col s12">
+                <input name="answer" type="text" required class="validate">
+                <label>답</label>
+            </div>
+        </div>
+        <div class="row">
+            <input type="submit" class="waves-effect waves-light btn" value="제출">
+        </div>
+    </form>
+    {% elif msg == 1 %}
+    <p class="green-text center-align">정답입니다.</p>
+    {% else %}
+    <p class="green-text center-align">이미 풀으셨습니다.</p>
+    {% endif %}
+   
+    <div class="row">
+        <div class="col s6">
+            {% if no == 1 %}
+            <a href="#" class="btn disabled">첫 문제입니다</a>
+            {% else %}
+            <a href="/core/solve/{{no|add:"-1"}}" class="waves-effect waves-light btn">이전 문제 보기</a>
+            {% endif %}
+        </div>
+        <div class="col s6 right-align">
+            {% if profile.progress_no > no %}
+            <a href="/core/solve/{{no|add:"1"}}" class="waves-effect waves-light btn">다음 문제 보기</a>
+            {% else %}
+            <a href="#" class="btn disabled">현재 문제를 먼저 푸세요</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

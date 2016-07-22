@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="main">
+    <h3 class="center-align">KAIST 즐거운 대학생활 미궁</h3>
+    <p><a href="/core/solve/" class="waves-effect waves-light btn-large">Solve!</a></p>
+    {% if profile and profile.problem_set %}
+    <p>반 번호: {{profile.team_no}}, 상태: {{profile.progress_no|add:"-1"}} / {{profile.problem_set.max_no}}</p>
+    {% else %}
+    <p class="red-text text-darken-4">문제가 지정되지 않았습니다.</p>
+    {% endif %}
+</div>
+{% endblock %}

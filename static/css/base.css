@@ -1,0 +1,37 @@
+#main {
+    text-align:center;
+    margin-bottom:20px;
+}
+
+#login {
+    text-align:center;
+    max-width:800px;
+    margin:0 auto;
+}
+
+#login p {
+    text-align:center;
+}
+
+#problem h3 {
+    text-align:center;
+}
+
+#problem form {
+    text-align:center;
+    max-width:400px;
+    margin:0 auto;
+}
+
+#problem form p {
+    text-align:center;
+}
+
+#complete {
+    text-align:center;
+}
+
+footer {
+    bottom:0;
+    width:100%;
+}
