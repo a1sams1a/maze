@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% block css %}
+{% autoescape off %}
+{{problem.css}}
+{% endautoescape %}
+{% endblock %}
+
 {% block content %}
 <div id="problem">
     <h3>!미궁! <small>- {{no}} / {{profile.problem_set.max_no}}</small></h3>

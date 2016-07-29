@@ -43,7 +43,11 @@ class ProblemAdmin(admin.ModelAdmin):
 
 
 class ProblemSetAdmin(admin.ModelAdmin):
+    class ProblemInline(admin.StackedInline):
+        model = Problem
+
     list_display = ('no', 'description')
+    inlines = (ProblemInline, )
 
 
 admin.site.unregister(User)

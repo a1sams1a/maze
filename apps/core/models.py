@@ -24,11 +24,12 @@ class UserProfile(models.Model):
     last_success = models.DateTimeField(null=True, blank=True)
 
     def __unicode__(self):
-        return 'Team %s (Solved: %s)' % (self.team_no, self.progress_no)
+        return 'Team %s (Solved: %s)' % (self.team_no, self.progress_no - 1)
 
 
 class Problem(models.Model):
     no = models.IntegerField()
+    css = models.TextField(null=True, blank=True)
     title = models.CharField(max_length=300)
     text = models.TextField()
     answer = models.CharField(max_length=100)
