@@ -20,12 +20,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'wk=x#k3h!+)u&2kg+hxo!%=r-rlpz8e-6m&8pdj+ob#7-)eu8e'
+with open(os.path.join(BASE_DIR, 'keys/django_secret')) as f:
+        SECRET_KEY = f.read().strip()
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = not os.path.isfile(os.path.join(BASE_DIR, 'deploy'))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['maze.sparcs.org'] if not DEBUG else []
 
 
 # Application definition
@@ -77,12 +79,27 @@ WSGI_APPLICATION = 'maze.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'maze',
+            'USER': 'maze',
+            'PASSWORD': 'DUMMY',
+            'HOST': 'localhost',
+            'PORT': '3306',
+        }
+    }
+
+with open(os.path.join(BASE_DIR, 'keys/db_pw')) as f:
+    DATABASES['default']['PASSWORD'] = f.read().strip()
 
 
 # Password validation

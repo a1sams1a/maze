@@ -93,3 +93,9 @@ apps/core/migrations/
 
 # Database
 db.sqlite3
+
+# Keys
+keys/*
+
+# Deploy Indicator
+deploy
