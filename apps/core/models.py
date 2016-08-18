@@ -36,7 +36,7 @@ class Problem(models.Model):
     problem_set = models.ForeignKey(ProblemSet, related_name='problems')
 
     def __unicode__(self):
-        return 'Problem %s of Set %s' % (self.problem_set, self.no)
+        return 'Problem %s of %s' % (self.no, self.problem_set)
 
     class Meta:
         unique_together = ('no', 'problem_set')

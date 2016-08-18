@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'^logout/$', views.logout),
 
     url(r'^solve/$', views.solve),
-    url(r'^solve/(\d)+/$', views.solve),
+    url(r'^solve/(\d+)/$', views.solve),
 ]
