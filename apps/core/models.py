@@ -31,7 +31,10 @@ class Problem(models.Model):
     no = models.IntegerField()
     css = models.TextField(null=True, blank=True)
     title = models.CharField(max_length=300)
-    text = models.TextField()
+    text1 = models.TextField(null=True, blank=True)
+    text2 = models.TextField(null=True, blank=True)
+    image1 = models.ImageField(null=True, blank=True)
+    image2 = models.ImageField(null=True, blank=True)
     answer = models.CharField(max_length=100)
     problem_set = models.ForeignKey(ProblemSet, related_name='problems')
 

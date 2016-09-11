@@ -8,15 +8,31 @@
 
 {% block content %}
 <div id="problem">
-    <h3>!미궁! <small>- {{no}} / {{profile.problem_set.max_no}}</small></h3>
+    {% if problem.image1 %}
+    <img src="{{problem.image1.url}}" alt="Image1 for Problem">
+    {% endif %}
+
+    {% if problem.text1 %}
     {% autoescape off %}
-    {{problem.text}}
+    {{problem.text1}}
     {% endautoescape %}
+    {% endif %}
+ 
+    {% if problem.image2 %}
+    <img src="{{problem.image2.url}}" alt="Image2 for Problem">
+    {% endif %}
+
+    {% if problem.text2 %}
+    {% autoescape off %}
+    {{problem.text2}}
+    {% endautoescape %}
+    {% endif %}
+
 
     {% if profile.progress_no == no %}
     <form class="col s12" action="/core/solve/{{no}}/" method="post">
         {% if msg == 2%}
-        <p class="red-text text-darken-4">잘못된 답입니다.</p>
+        <p class="red-text">잘못된 답입니다.</p>
         {% endif %}
 
         {% csrf_token %}
@@ -31,9 +47,9 @@
         </div>
     </form>
     {% elif msg == 1 %}
-    <p class="green-text center-align">정답입니다.</p>
+    <p class="red-text center-align">정답입니다.</p>
     {% else %}
-    <p class="green-text center-align">이미 풀으셨습니다.</p>
+    <p class="red-text center-align">이미 풀으셨습니다.</p>
     {% endif %}
    
     <div class="row">

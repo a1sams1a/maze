@@ -38,20 +38,37 @@ class AnswerLogAdmin(admin.ModelAdmin):
     list_display = ('user', 'problem', 'time', 'ip', 'answer')
 
 
-class ProblemAdmin(admin.ModelAdmin):
-    list_display = ('no', 'problem_set', 'title', 'text', 'answer')
-
-
 class ProblemSetAdmin(admin.ModelAdmin):
     class ProblemInline(admin.StackedInline):
         model = Problem
 
+    def make_defaults(modeladmin, request, queryset):
+        temp = list(queryset)
+        if len(temp) != 1:
+            return
+        temp = temp[0]
+
+        for s in ProblemSet.objects.all():
+            if s.no == temp.no:
+                continue
+
+            for p in s.problems.all():
+                p.delete()
+
+            problems = temp.problems
+            for p in temp.problems.all():
+                Problem(no=p.no, css=p.css, title=p.title,
+                        text1=p.text1, text2=p.text2,
+                        image1=p.image1, image2=p.image2,
+                        answer=p.answer, problem_set=s).save()
+
+    make_defaults.short_description = "Change All Other ProblemSet to This Problem Set"
+
     list_display = ('no', 'description')
     inlines = (ProblemInline, )
-
+    actions = [make_defaults, ]
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(AnswerLog, AnswerLogAdmin)
-admin.site.register(Problem, ProblemAdmin)
 admin.site.register(ProblemSet, ProblemSetAdmin)

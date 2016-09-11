@@ -1,6 +1,50 @@
+@import url(https://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+
+body {
+    color:#fff;
+    background-color:#000;
+    font-family:'Nanum Myeongjo', serif;
+}
+
+.red-text {
+    color:#c73e34 !important;
+}
+
+nav {
+    background-color:#616161;
+}
+
+footer.page-footer {
+    background-color:#616161;
+}
+
+p.ban-list {
+    margin-bottom:0;
+    margin-top:3px;
+}
+
+.btn, .btn-large {
+    color:#fff;
+    background-color:rgba(0,0,0,0);
+    border:1px #fff solid;
+}
+
+.btn:hover, .btn-large:hover {
+    background-color:rgba(255,255,255,0.4);
+}
+
 #main {
     text-align:center;
-    margin-bottom:20px;
+}
+
+#ban {
+    margin:50px auto;
+    width:400px;
+    text-align:center;
+}
+
+@media(max-width:400px) {
+    #ban { width:100%; }
 }
 
 #login {
@@ -11,6 +55,14 @@
 
 #login p {
     text-align:center;
+}
+
+#problem {
+    text-align:center;
+}
+
+#problem img {
+    max-width:100%;
 }
 
 #problem h3 {
@@ -31,7 +83,18 @@
     text-align:center;
 }
 
-footer {
+footer.page-footer {
     bottom:0;
     width:100%;
+    font-size:80%;
+    padding-top:5px;
+}
+
+footer.page-footer .row {
+    margin-bottom:5px;
+}
+
+footer.page-footer .footer-copyright {
+    height:40px;
+    line-height:40px;
 }
