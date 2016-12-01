@@ -1,0 +1,87 @@
+!미궁! 운영진을 위한 설명서
+
+* Written By Sam Jo
+* Last Modified: 2016-07-30T18:35+09:00
+
+* 권고사항: 이미지는 서버 트래픽을 줄이기 위해 가급적 Google Photo 링크 등 외부 서비스를 사용하는 것을 권장합니다.
+* 강제사항: 동영상을 올리지 마세요. 동영상은 Youtube에 올리고 문제에 youtube player를 embed하기 바랍니다.
+
+{id}: [검열됨]
+{pw}: [검열됨]
+{host}: [검열됨]
+{root-dir}: [검열됨]
+
+0. 이미지 업로드 방법
+- FTP client를 하나 다운받습니다.
+-- Filezilla (Windows, OSX, Linux): https://filezilla-project.org/download.php?type=client
+-- Xftp (Windows): http://www.netsarang.co.kr/download/down_xfp5.html
+- 다음 정보를 입력하여 접속합니다.
+-- Host: sftp://{host}
+-- ID: {id}
+-- PW: {pw}
+-- Port: 22
+-- 주의: 보안 문제로 인해 카이스트 내부망에서만 접속 가능합니다.
+- {root-dir}/media/ 폴더에 사진을 업로드하게 되면 사진의 URL은 {host}/media/파일명 입니다.
+- 예: {root-dir}/media/cat.png가 있다면 {host}/media/cat.png 으로 접근할 수 있습니다.
+
+1. 관리 페이지 로그인
+- {host}/manage/ 페이지에 접속하여 id 및 pw를 입력합니다.
+- 초기 설정은 id: ???, pw: ??? 입니다.
+
+2. 사용자 추가
+- 사용자 관리 페이지 {host}/manage/auth/user/ 에 접속합니다.
+- 우측 상단에 사용자 추가를 누르고 정보를 입력합니다.
+-- 사용자명과 비밀번호는 로그인 정보입니다.
+-- Team no는 새터 분반을 적습니다.
+-- Progress no 및 나머지 항목은 수정하지 않습니다.
+
+3. 사용자 수정
+- 사용자 관리 페이지 {host}/manage/auth/user/ 에 접속합니다.
+- 원하는 사용자를 목록에서 찾아 아이디를 클릭합니다.
+- 원하는 작업을 수행하고 페이지 하단의 저장 또는 저장 및 편집 계속 버튼을 누릅니다.
+    1. 비밀번호 변경
+    - url 끝의 /change/를 /password/로 바꾸어 비밀번호 변경 페이지에 접속합니다.
+    - 비밀번호를 원하는대로 수정합니다.
+    2. 팀 번호 수정
+    - 페이지 하단의 Team no를 수정합니다.
+    3. 진행 상태(푼 문제 수정)
+    - 페이지 하단의 Progress no를 수정합니다. 1 이면 어떤 문제도 풀지 않았으며, 문제수+1 이면 모든 문제를 푼 상황입니다.
+    4. Problem set 수정
+    - 페이지 하단의 Problem를 수정합니다.
+
+4. 사용자 삭제
+- 사용자 관리 페이지 {host}/manage/auth/user/ 에 접속합니다.
+- 원하는 사용자를 목록에서 찾아 아이디를 클릭합니다.
+- 페이지 하단의 삭제 버튼을 누릅니다.
+- 주의: 사용자를 삭제할 경우 해당 사용자가 입력했던 로그가 전부 삭제됩니다.
+
+5. 로그 확인
+- 로그 페이지 {host}/manage/core/answerlog/ 에 접속합니다.
+- (사용자, 문제, 시간, IP, 입력한 답안)의 목록이 전부 출력됩니다.
+
+6. Problem Set 생성
+- Problem Set 관리 페이지 {host}/manage/core/problemset/ 에 접속합니다.
+- 우측 상단에 Problem Set 추가를 누르고 정보를 입력합니다.
+-- no는 problem set의 고유 번호입니다. 혼동을 피하기 위해 각 새터반 반 번호를 입력하는 것을 권장합니다.
+-- description은 구분의 용이성을 위해 만들어놓은 필드입니다. 사용자에게 보이지 않으니 아무 내용이나 입력하여도 됩니다.
+- 아래의 문제를 입력합니다.
+-- no는 문제 번호입니다. 반드시 1부터 시작하며, 1씩 증가하여야 합니다.
+-- css는 해당 문제가 로드 될 때 사용할 css입니다. 자세한 내용은 css 문법을 참고하시기 바랍니다.
+-- title은 문제의 제목입니다. 사용자에게 보이지 않습니다.
+-- text는 문제의 본문입니다. 사용자에게 보이며, html 태그를 사용할 수 있습니다.
+-- answer는 문제의 답입니다. 한글, 한자, 영어 등 제어문자를 제외한 모든 문자열이 가능합니다. (스페이스 포함)
+- 기본적으로 문제 3개를 넣을 수 있도록 되어 있습니다. 더 필요하면 하단의 Problem 더 추가하기 버튼을 누르면 됩니다.
+
+7. Problem Set 수정
+- Problem Set 관리 페이지 {host}/manage/core/problemset/ 에 접속합니다.
+- 원하는 Problem Set를 목록에서 찾아 번호를 클릭합니다.
+- Problem Set를 생성할 때와 동일한 방법으로 정보를 입력합니다.
+- 중간에 원하지 않는 문제가 있을 경우 문제마다 우측에 있는 삭제 checkbox를 선택한 뒤 저장을 누르면 삭제됩니다.
+-- 다만, 최종 결과가 항상 문제 번호가 1부터 1씩 증가하도록 만들어야 합니다.
+
+8. Problem Set 삭제
+- Problem Set 관리 페이지 {host}/manage/core/problemset/ 에 접속합니다.
+- 원하는 Problem Set를 목록에서 찾아 번호를 클릭합니다.
+- 페이지 하단의 삭제 버튼을 누릅니다.
+- 주의: Problem Set를 삭제할 경우 해당 Problem Set에 있었던 모든 문제와 문제에 대한 로그가 삭제됩니다.
+- 주의: 또한, 해당 Problem Set이 배정된 사용자는 아무 problem set이 배정되지 않은 상태로 변경되며, 어떠한 문제를 풀 수 없습니다.
